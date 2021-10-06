@@ -10,28 +10,28 @@ export class ProductController {
     }
 
     @Get()
-    findAll(): Product[] {
+    async findAll(): Promise<Product[]> {
         return this.productService.findAll();
     }
 
     @Get(':id')
-    findById(@Param() params): Product{
+    async findById(@Param() params): Promise<Product>{
         return this.productService.findById(params.id);
     }
 
     @Post()
-    create(@Body() product: Product) {
+    async create(@Body() product: Product) {
         //product.id = 100;
         this.productService.create(product);
     } 
 
     @Put()
-    change(@Body() product) {
+    async change(@Body() product): Promise<[number, Product[]]>{
         return this.productService.change(product)
     }
 
     @Delete(':id')
-    delete(@Param() params) {
+    async delete(@Param() params) {
         this.productService.delete(params.id)
     }
 }
